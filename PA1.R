@@ -1,30 +1,15 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
----
+## load and preprocess
 
-
-## Loading and preprocessing the data
-``` {r}
 rough<-read.csv("activity.csv")
 library("dplyr")
 daystep<-summarize(group_by(rough, date), s=sum(steps), m=mean(steps), j=median(steps))
 
-```
-
 
 
 ## What is mean total number of steps taken per day?
-``` {r}
 hist(daystep$s)
 
-```
 
-1. The mean of the total number of steps taken is `r mean(daystep$m, na.rm = FALSE)`.  
-
-2. The median of the total number of steps taken is `r median(daystep$m, na.rm = FALSE)`.  
 
 ## What is the average daily activity pattern?
 
@@ -35,3 +20,4 @@ hist(daystep$s)
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
+
