@@ -5,7 +5,6 @@ output:
     keep_md: true
 ---
 
-
 ## Loading and preprocessing the data
 ``` {r}
 rough<-read.csv("activity.csv")
@@ -14,16 +13,14 @@ daystep<-summarize(group_by(rough, date), s=sum(steps), m=mean(steps), j=median(
 
 ```
 
-
-
 ## What is mean total number of steps taken per day?
 ``` {r}
 hist(daystep$s)
 
 ```
 ```{r, echo=FALSE}
-stepmean<-mean(daystep$m, na.rm = TRUE)
-stepmedian<-median(daystep$m, na.rm = TRUE)
+stepmean<-sprintf(mean(daystep$s, na.rm = TRUE), fmt='%#.2f')
+stepmedian<-sprintf(median(daystep$s, na.rm = TRUE), fmt='%#.2f')
 ```
 1. The mean of the total number of steps taken is `r stepmean`.  
 
@@ -34,7 +31,6 @@ stepmedian<-median(daystep$m, na.rm = TRUE)
 intstep<-summarize(group_by(rough, interval), ave=mean(steps, na.rm = TRUE))
 plot(intstep, type='l')
 ```
-
 
 ## Imputing missing values
 

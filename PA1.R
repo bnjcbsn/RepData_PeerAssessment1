@@ -9,6 +9,10 @@ daystep<-summarize(group_by(rough, date), s=sum(steps), m=mean(steps), j=median(
 ## What is mean total number of steps taken per day?
 hist(daystep$s)
 
+stepmean<-mean(daystep$s, na.rm = TRUE)
+sprintf(stepmean, fmt='%#.2f')
+stepmedian<-median(daystep$s, na.rm = TRUE)
+stepmedian
 
 
 ## What is the average daily activity pattern?
