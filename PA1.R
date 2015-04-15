@@ -12,6 +12,7 @@ hist(daystep$s)
 
 
 ## What is the average daily activity pattern?
+intstep<-summarize(group_by(rough, interval), ave=mean(steps, na.rm = TRUE))
 
 
 

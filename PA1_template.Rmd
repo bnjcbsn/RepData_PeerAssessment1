@@ -21,13 +21,19 @@ daystep<-summarize(group_by(rough, date), s=sum(steps), m=mean(steps), j=median(
 hist(daystep$s)
 
 ```
+```{r, echo=FALSE}
+stepmean<-mean(daystep$m, na.rm = TRUE)
+stepmedian<-median(daystep$m, na.rm = TRUE)
+```
+1. The mean of the total number of steps taken is `r stepmean`.  
 
-1. The mean of the total number of steps taken is `r mean(daystep$m, na.rm = FALSE)`.  
-
-2. The median of the total number of steps taken is `r median(daystep$m, na.rm = FALSE)`.  
+2. The median of the total number of steps taken is `r stepmedian`.  
 
 ## What is the average daily activity pattern?
-
+``` {r}
+intstep<-summarize(group_by(rough, interval), ave=mean(steps, na.rm = TRUE))
+plot(intstep, type='l')
+```
 
 
 ## Imputing missing values
