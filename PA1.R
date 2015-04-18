@@ -17,11 +17,18 @@ stepmedian
 
 ## What is the average daily activity pattern?
 intstep<-summarize(group_by(rough, interval), ave=mean(steps, na.rm = TRUE))
-
+plot(intstep, type='l')
 
 
 ## Imputing missing values
-
+totnas<-sum(is.na(rough$steps))
+library("plyr")
+impute.mean <- function(x) replace(x, is.na(x), mean(x, na.rm = TRUE))
+impsteps<-ddply(rough, ~ interval, transform, steps = impute.mean(steps))
+impsteps<-impsteps[order(impsteps$date), ]
+detach("package:plyr", unload=TRUE)
+smostep<-summarize(group_by(impsteps, interval), ave=mean(steps))
+plot(smostep, type='l')
 
 
 ## Are there differences in activity patterns between weekdays and weekends?

@@ -35,16 +35,22 @@ plot(intstep, type='l')
 ## Imputing missing values
 ``` {r}
 totnas<-sum(is.na(rough$steps))
+## source: http://www.mail-archive.com/r-help@r-project.org/msg58289.html
+
 library("plyr")
 impute.mean <- function(x) replace(x, is.na(x), mean(x, na.rm = TRUE))
 impsteps<-ddply(rough, ~ interval, transform, steps = impute.mean(steps))
 impsteps<-impsteps[order(impsteps$date), ]
-smostep<-summarize(group_by(impsteps, interval), ave=mean(steps, na.rm = TRUE))
+detach("package:plyr", unload=TRUE)
+smostep<-summarize(group_by(impsteps, interval), ave=mean(steps))
 plot(smostep, type='l')
 ```
 
 1. The total number of missing values in the dataset are `r totnas`.
 
-
+``` {r}
+daystep2<-summarize(group_by(impsteps, date), s=sum(steps), m=mean(steps), j=median(steps))
+hist(daystep2$s)
+```
 
 ## Are there differences in activity patterns between weekdays and weekends?
