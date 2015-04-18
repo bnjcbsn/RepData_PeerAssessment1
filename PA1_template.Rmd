@@ -33,6 +33,17 @@ plot(intstep, type='l')
 ```
 
 ## Imputing missing values
+``` {r}
+totnas<-sum(is.na(rough$steps))
+library("plyr")
+impute.mean <- function(x) replace(x, is.na(x), mean(x, na.rm = TRUE))
+impsteps<-ddply(rough, ~ interval, transform, steps = impute.mean(steps))
+impsteps<-impsteps[order(impsteps$date), ]
+smostep<-summarize(group_by(impsteps, interval), ave=mean(steps, na.rm = TRUE))
+plot(smostep, type='l')
+```
+
+1. The total number of missing values in the dataset are `r totnas`.
 
 
 
