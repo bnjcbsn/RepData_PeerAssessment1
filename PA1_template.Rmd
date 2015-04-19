@@ -56,5 +56,17 @@ plot(smostep, type='l')
 daystep2<-summarize(group_by(impsteps, date), s=sum(steps), m=mean(steps), j=median(steps))
 hist(daystep2$s)
 ```
+```{r, echo=FALSE}
+stepmean2<-sprintf(mean(daystep2$s, na.rm = TRUE), fmt='%#.2f')
+stepmedian2<-sprintf(median(daystep2$s, na.rm = TRUE), fmt='%#.2f')
+```
+
+1. The mean of the total number of steps taken from the imputed set is `r stepmean2`.  
+
+2. The median of the total number of steps taken from the mputed set is `r stepmedian`.  
+
+3. Imputing values did not significantly change the means and medians, not unexpected given that means were used to replace NAs.
+
+4. This histogram demonstrates that imputing values created many more days reflecting more activity than before. 
 
 ## Are there differences in activity patterns between weekdays and weekends?

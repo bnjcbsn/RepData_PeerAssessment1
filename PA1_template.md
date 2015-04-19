@@ -95,4 +95,13 @@ hist(daystep2$s)
 
 ![](figure/unnamed-chunk-6-1.png) 
 
+
+1. The mean of the total number of steps taken from the imputed set is 10766.19.  
+
+2. The median of the total number of steps taken from the mputed set is 10765.00.  
+
+3. Imputing values did not significantly change the means and medians, not unexpected given that means were used to replace NAs.
+
+4. This histogram demonstrates that imputing values created many more days reflecting more activity than before. 
+
 ## Are there differences in activity patterns between weekdays and weekends?
