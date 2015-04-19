@@ -4,9 +4,13 @@ output:
   html_document:
     keep_md: true
 ---
-
+```{r global_options}
+knitr::opts_chunk$set(fig.width=12, fig.height=8, fig.path='figure/')
+```
 ## Loading and preprocessing the data
 ``` {r}
+## sourced from https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip
+## ensure data is in working directory
 rough<-read.csv("activity.csv")
 library("dplyr")
 daystep<-summarize(group_by(rough, date), s=sum(steps), m=mean(steps), j=median(steps))
@@ -46,7 +50,7 @@ smostep<-summarize(group_by(impsteps, interval), ave=mean(steps))
 plot(smostep, type='l')
 ```
 
-1. The total number of missing values in the dataset are `r totnas`.
+1. The total number of missing values in the dataset before imputing are `r totnas`. Imputing was done by calculating the mean of each of the time intervals and the using those means to replace all NAs within matching time intervals.
 
 ``` {r}
 daystep2<-summarize(group_by(impsteps, date), s=sum(steps), m=mean(steps), j=median(steps))
